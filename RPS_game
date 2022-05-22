@@ -4,30 +4,37 @@ import numpy as np
 #load the model
 model = load_model('keras_model.h5')
 # return video from the first webcam on computer. Cv2: OpenCV, VideoCapture is a object, index is to specify which webcam
-cap = cv2.VideoCapture(0) 
+cap = cv2.VideoCapture(0)
 #np.ndarray() is a class/ np.array() is a method
-#
+#dtype: to specify the datatype, in this case, a float32 data type
+#float32 is known as 32-bit precision, the higher the number, the more precise and takes more space
+#create an array of image shape to feed into the keras model
+#shape = (N,H,W,C) (N: number of image; H: height of image; W: width of image; C: channels, usually 3 representing Red, Green, Blue)
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
-#This code initiates an infinite loop (to be broken later by a break statement)where we have ret and frame being defined as the cap.read(). 
+#This code initiates an infinite loop (to be broken later by a break statement)where we have ret and frame being defined as the cap.read().
 #Basically, ret is a boolean regarding whether or not there was a return at all, at the frame is each frame that is returned. If there is no frame, you wont get an error, you will get None.
 #cap.read() returns a bool (True/False). If the frame is read correctly, it will be True. So you can check for the end of the video by checking this returned value.
-while True: 
-    ret, frame = cap.read() 
+while True:
+    ret, frame = cap.read()
     #cv2.resize is a function to resize image without maintaining aspect ratio.
-    #cv2.INTER_AREA is one of the five OpenCV default interpolation method 
-    resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA) 
+    #cv2.INTER_AREA is one of the five OpenCV default interpolation method for maintaining ratio
+    # resize so the image fits into the array
+    resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
     #convert image to numpy array with the np.array()method
     image_np = np.array(resized_frame)
+
     normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
+    #load the normalised image into the array
     data[0] = normalized_image
+    #make prediction using model.predit()
     prediction = model.predict(data)
     cv2.imshow('frame', frame)
     # Press q to close the window
     print(prediction)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
-            
+
 # After the loop release the cap object
 cap.release()
 # Destroy all the windows
