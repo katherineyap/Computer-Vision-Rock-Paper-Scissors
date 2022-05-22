@@ -17,7 +17,8 @@ The commands are as follow:
 * pip install tensorflow
 * pip install ipykernel
 
-Then, run the downloaded model with the given code
+Then, run the downloaded model with the given code.
+Get familiar with the code
 ```
 import cv2 
 from keras.models import load_model
@@ -44,4 +45,10 @@ cap.release()
 # Destroy all the windows
 cv2.destroyAllWindows()
 ```
+## Milestone 3 - Create a Rock-Paper-Scissors Game
+Created a separate file to play the game without using the camera
+* Import Random module for computer's choice, and Input for user's choice 
+* Use if-elif-else statement to figure who wins 
+* stimulate the game
+
 
