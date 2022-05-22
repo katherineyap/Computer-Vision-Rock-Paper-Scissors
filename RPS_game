@@ -27,15 +27,19 @@ while True:
     normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
     #load the normalised image into the array
     data[0] = normalized_image
-    #make prediction using model.predit()
+    #make prediction using model.predict()
     prediction = model.predict(data)
+    #syntax: cv2.imshow(window_name, image)
+    #window_name: a string representing the name of the window in which image to be displayed
     cv2.imshow('frame', frame)
     # Press q to close the window
     print(prediction)
+    #0xFF is in hexadecimal format
+    # this essentially means if we've waited at last 1ms and we've pressed 'q', then loop will break
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-# After the loop release the cap object
+# After the loop release the cap object 释放摄影机
 cap.release()
 # Destroy all the windows
 cv2.destroyAllWindows()
