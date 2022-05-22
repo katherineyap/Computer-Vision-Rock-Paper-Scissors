@@ -1,8 +1,12 @@
 import cv2
 from keras.models import load_model
 import numpy as np
+#load the model
 model = load_model('keras_model.h5')
-cap = cv2.VideoCapture(0) # return video from the first webcam on computer. Cv2: OpenCV, VideoCapture is a object, index is to specify which webcam
+# return video from the first webcam on computer. Cv2: OpenCV, VideoCapture is a object, index is to specify which webcam
+cap = cv2.VideoCapture(0) 
+#np.ndarray() is a class/ np.array() is a method
+#
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
 #This code initiates an infinite loop (to be broken later by a break statement)where we have ret and frame being defined as the cap.read(). 
@@ -13,7 +17,7 @@ while True:
     #cv2.resize is a function to resize image without maintaining aspect ratio.
     #cv2.INTER_AREA is one of the five OpenCV default interpolation method 
     resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA) 
-    #convert image to numpy array with the array()function
+    #convert image to numpy array with the np.array()method
     image_np = np.array(resized_frame)
     normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
     data[0] = normalized_image
