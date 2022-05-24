@@ -23,7 +23,6 @@ while True:
     resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
     #convert image to numpy array with the np.array()method
     image_np = np.array(resized_frame)
-
     normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
     #load the normalised image into the array
     data[0] = normalized_image
@@ -41,5 +40,6 @@ while True:
 
 # After the loop release the cap object 释放摄影机
 cap.release()
+cv2.waitKey(1)
 # Destroy all the windows
 cv2.destroyAllWindows()
