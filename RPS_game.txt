@@ -2,7 +2,7 @@ import cv2
 from keras.models import load_model
 import numpy as np
 #load the model
-model = load_model('keras_model.h5')
+model = load_model('keras_model.h5', compile=False)
 # return video from the first webcam on computer. Cv2: OpenCV, VideoCapture is a object, index is to specify which webcam
 cap = cv2.VideoCapture(0)
 #np.ndarray() is a class/ np.array() is a method
