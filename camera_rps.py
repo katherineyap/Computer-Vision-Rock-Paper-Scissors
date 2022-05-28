@@ -10,4 +10,5 @@ model_dic = {0:'Scissors', 1:'Rock',2: 'Paper', 3: 'Nothing'}
 
 def get_prediction(prediction):
    indices = np.argmax(prediction[0])
-   user = model_dic[indices]
+   computer_choice = model_dic[indices]
+   return computer_choice
